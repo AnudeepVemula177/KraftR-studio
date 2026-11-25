@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kraftr Studio | Student Digital Services</title>
+  <style>
+    /* 1. COLOR PALETTE & THEME VARIABLES */
+    :root {
+      --bg-dark: #0f172a;
+      --card-bg: #1e293b;
+      --accent: #38bdf8;
+      --accent-hover: #0284c7;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border: #334155;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    /* 2. NAVIGATION BAR */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 8%;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      background: rgba(15, 23, 42, 0.9);
+      backdrop-filter: blur(8px);
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    .logo span {
+      color: var(--accent);
+    }
+
+    .cta-btn {
+      background: var(--accent);
+      color: #0f172a;
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.9rem;
+      transition: 0.2s;
+    }
+
+    .cta-btn:hover {
+      background: var(--accent-hover);
+      color: #fff;
+    }
+
+    /* 3. HERO SECTION */
+    .hero {
+      text-align: center;
+      padding: 4.5rem 8% 3rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--accent);
+      padding: 0.35rem 0.9rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .hero h1 {
+      font-size: 2.6rem;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+    }
+
+    /* 4. SERVICES & PRICING GRID */
+    .section {
+      padding: 3rem 8%;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 1.8rem;
+      margin-bottom: 2rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.8rem;
+      transition: transform 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent);
+    }
+
+    .price {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--accent);
+      margin: 0.6rem 0;
+    }
+
+    .card ul {
+      list-style: none;
+      margin-top: 1rem;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .card ul li {
+      margin-bottom: 0.4rem;
+    }
+
+    /* 5. ORDER FORM SECTION */
+    .order-box {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem;
+      max-width: 550px;
+      margin: 0 auto;
+    }
+
+    .form-group {
+      margin-bottom: 1.2rem;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.4rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 0.75rem;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--bg-dark);
+      color: var(--text-main);
+      font-size: 1rem;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    button.submit-btn {
+      width: 100%;
+      padding: 0.9rem;
+      background: var(--accent);
+      color: #0f172a;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    button.submit-btn:hover {
+      background: var(--accent-hover);
+      color: #fff;
+    }
+
+    #statusMessage {
+      margin-top: 1rem;
+      text-align: center;
+      font-weight: 600;
+      color: #4ade80;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--border);
+      margin-top: 3rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP NAVBAR -->
+  <header>
+    <div class="logo">Kraftr<span>.</span></div>
+    <a href="#order" class="cta-btn">Place an Order</a>
+  </header>
+
+  <!-- HERO BANNER -->
+  <section class="hero">
+    <div class="badge">Fast 24-Hour Delivery • Student-Friendly Pricing</div>
+    <h1>Clean Resumes, Sharp PPTs & Eye-Catching Posters.</h1>
+    <p>Helping college students, freshers, and local businesses stand out with modern designs—crafted fast and affordably by Kraftr Studio.</p>
+    <a href="#services" class="cta-btn">Explore Services & Pricing</a>
+  </section>
+
+  <!-- SERVICES & PRICING -->
+  <section id="services" class="section">
+    <h2 class="section-title">Services & Introductory Pricing</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>ATS Resume Design</h3>
+        <div class="price">₹99 – ₹199</div>
+        <p>Clean, recruiter-ready resumes built to pass ATS filters.</p>
+        <ul>
+          <li>✓ Fresher & Internship Resumes</li>
+          <li>✓ Existing CV Redesign</li>
+          <li>✓ Editable PDF & Doc Formats</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>PPT Creation & Redesign</h3>
+        <div class="price">₹199 – ₹299</div>
+        <p>Up to 8 visually structured slides for seminars & pitches.</p>
+        <ul>
+          <li>✓ Academic & Technical Seminars</li>
+          <li>✓ Project Review Presentations</li>
+          <li>✓ Modern Visual Slide Makeover</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Poster & Graphic Design</h3>
+        <div class="price">₹49 – ₹149</div>
+        <p>Scroll-stopping graphics for events and small businesses.</p>
+        <ul>
+          <li>✓ College Fest & Club Posters</li>
+          <li>✓ Instagram Posts & Stories</li>
+          <li>✓ Local Shop Promo Flyers</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ORDER FORM -->
+  <section id="order" class="section">
+    <h2 class="section-title">Start Your Order</h2>
+    <div class="order-box">
+      <form id="orderForm">
+        <div class="form-group">
+          <label for="clientName">Your Name</label>
+          <input type="text" id="clientName" placeholder="e.g., Rahul Sharma" required />
+        </div>
+
+        <div class="form-group">
+          <label for="whatsapp">WhatsApp Number</label>
+          <input type="tel" id="whatsapp" placeholder="e.g., 9876543210" required />
+        </div>
+
+        <div class="form-group">
+          <label for="service">Select Service</label>
+          <select id="service" required>
+            <option value="ATS Resume (₹99 - ₹199)">ATS Resume Design (₹99 – ₹199)</option>
+            <option value="PPT Creation (₹199 - ₹299)">PPT Creation / Redesign (₹199 – ₹299)</option>
+            <option value="Poster Design (₹49 - ₹149)">Poster & Graphic Design (₹49 – ₹149)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="details">Project Details & Deadline</label>
+          <textarea id="details" rows="3" placeholder="Tell me what you need (e.g., 8-slide seminar PPT on IoT by tomorrow evening)..." required></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn">Submit Request</button>
+        <div id="statusMessage"></div>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    © 2026 Kraftr Studio • Built by a BTech Student
+  </footer>
+
+  <!-- MIDDLE-END JAVASCRIPT LOGIC -->
+  <!-- Load Supabase JavaScript Library -->
+  <script src="https://jsdelivr.net"></script>
+
+    // 1. PASTE YOUR SUPABASE KEYS HERE
+    const SUPABASE_URL = " https://etjvpuseslufdansrbve.supabase.co/rest/v1/ ";
+    const SUPABASE_KEY = " sb_publishable_RltKkM1euhyKQ-82CpCTKg_beCA5jhg ";
+    const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    const form = document.getElementById('orderForm');
+    const statusMessage = document.getElementById('statusMessage');
+
+    // 2. SEND FORM DATA TO DATABASE
+    form.addEventListener('submit', async function(event) {
+      event.preventDefault();
+      statusMessage.style.color = "#38bdf8";
+      statusMessage.textContent = "⏳ Sending your order...";
+
+      const orderData = {
+        name: document.getElementById('clientName').value,
+        whatsapp: document.getElementById('whatsapp').value,
+        service: document.getElementById('service').value,
+        details: document.getElementById('details').value
+      };
+
+      // Insert row into your 'orders' table
+      const { error } = await supabaseClient
+        .from('orders')
+        .insert([orderData]);
+
+      if (error) {
+        statusMessage.style.color = "#f87171";
+        statusMessage.textContent = "❌ Error saving order: " + error.message;
+      } else {
+        statusMessage.style.color = "#4ade80";
+        statusMessage.textContent = "✅ Order saved, " + orderData.name + "! Kraftr Studio will message you on WhatsApp shortly.";
+        form.reset();
+      }
+    });
+  </script>
+
+</body>
+</html>
