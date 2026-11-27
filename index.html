@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Kraftr Studio | Student Digital Services</title>
   <style>
-    /* 1. COLOR PALETTE & THEME VARIABLES */
     :root {
       --bg-dark: #0f172a;
       --card-bg: #1e293b;
@@ -21,6 +20,7 @@
       margin: 0;
       padding: 0;
       font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      scroll-behavior: smooth;
     }
 
     body {
@@ -29,7 +29,6 @@
       line-height: 1.6;
     }
 
-    /* 2. NAVIGATION BAR */
     header {
       display: flex;
       justify-content: space-between;
@@ -38,7 +37,8 @@
       border-bottom: 1px solid var(--border);
       position: sticky;
       top: 0;
-      background: rgba(15, 23, 42, 0.9);
+      z-index: 100;
+      background: rgba(15, 23, 42, 0.92);
       backdrop-filter: blur(8px);
     }
 
@@ -61,6 +61,7 @@
       font-weight: 700;
       font-size: 0.9rem;
       transition: 0.2s;
+      display: inline-block;
     }
 
     .cta-btn:hover {
@@ -68,7 +69,6 @@
       color: #fff;
     }
 
-    /* 3. HERO SECTION */
     .hero {
       text-align: center;
       padding: 4.5rem 8% 3rem;
@@ -88,7 +88,7 @@
     }
 
     .hero h1 {
-      font-size: 2.6rem;
+      font-size: 2.5rem;
       line-height: 1.2;
       margin-bottom: 1rem;
     }
@@ -99,7 +99,6 @@
       margin-bottom: 2rem;
     }
 
-    /* 4. SERVICES & PRICING GRID */
     .section {
       padding: 3rem 8%;
       max-width: 1100px;
@@ -149,7 +148,6 @@
       margin-bottom: 0.4rem;
     }
 
-    /* 5. ORDER FORM SECTION */
     .order-box {
       background: var(--card-bg);
       border: 1px solid var(--border);
@@ -207,7 +205,7 @@
       margin-top: 1rem;
       text-align: center;
       font-weight: 600;
-      color: #4ade80;
+      font-size: 0.95rem;
     }
 
     footer {
@@ -222,13 +220,11 @@
 </head>
 <body>
 
-  <!-- TOP NAVBAR -->
   <header>
     <div class="logo">Kraftr<span>.</span></div>
     <a href="#order" class="cta-btn">Place an Order</a>
   </header>
 
-  <!-- HERO BANNER -->
   <section class="hero">
     <div class="badge">Fast 24-Hour Delivery • Student-Friendly Pricing</div>
     <h1>Clean Resumes, Sharp PPTs & Eye-Catching Posters.</h1>
@@ -236,7 +232,6 @@
     <a href="#services" class="cta-btn">Explore Services & Pricing</a>
   </section>
 
-  <!-- SERVICES & PRICING -->
   <section id="services" class="section">
     <h2 class="section-title">Services & Introductory Pricing</h2>
     <div class="grid">
@@ -275,7 +270,6 @@
     </div>
   </section>
 
-  <!-- ORDER FORM -->
   <section id="order" class="section">
     <h2 class="section-title">Start Your Order</h2>
     <div class="order-box">
@@ -314,19 +308,16 @@
     © 2026 Kraftr Studio • Built by a BTech Student
   </footer>
 
-  <!-- MIDDLE-END JAVASCRIPT LOGIC -->
-  <!-- Load Supabase JavaScript Library -->
   <script src="https://jsdelivr.net"></script>
 
-    // 1. PASTE YOUR SUPABASE KEYS HERE
-    const SUPABASE_URL = " https://etjvpuseslufdansrbve.supabase.co/rest/v1/ ";
-    const SUPABASE_KEY = " sb_publishable_RltKkM1euhyKQ-82CpCTKg_beCA5jhg ";
+  <script>
+    const SUPABASE_URL = "https://supabase.co";
+    const SUPABASE_KEY = "sb_publishable_RltKkM1euhyKQ-82CpCTKg_beCA5jhg";
     const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
     const form = document.getElementById('orderForm');
     const statusMessage = document.getElementById('statusMessage');
 
-    // 2. SEND FORM DATA TO DATABASE
     form.addEventListener('submit', async function(event) {
       event.preventDefault();
       statusMessage.style.color = "#38bdf8";
@@ -339,7 +330,6 @@
         details: document.getElementById('details').value
       };
 
-      // Insert row into your 'orders' table
       const { error } = await supabaseClient
         .from('orders')
         .insert([orderData]);
