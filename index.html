@@ -308,12 +308,9 @@
     © 2026 Kraftr Studio • Built by a BTech Student
   </footer>
 
-  <script src="https://jsdelivr.net"></script>
-
   <script>
     const SUPABASE_URL = "https://supabase.co";
     const SUPABASE_KEY = "sb_publishable_RltKkM1euhyKQ-82CpCTKg_beCA5jhg";
-    const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
     const form = document.getElementById('orderForm');
     const statusMessage = document.getElementById('statusMessage');
@@ -330,17 +327,30 @@
         details: document.getElementById('details').value
       };
 
-      const { error } = await supabaseClient
-        .from('orders')
-        .insert([orderData]);
+      try {
+        const response = await fetch(SUPABASE_URL, {
+          method: "POST",
+          headers: {
+            "apikey": SUPABASE_KEY,
+            "Authorization": "Bearer " + SUPABASE_KEY,
+            "Content-Type": "application/json",
+            "Prefer": "return=minimal"
+          },
+          body: JSON.stringify(orderData)
+        });
 
-      if (error) {
+        if (response.ok) {
+          statusMessage.style.color = "#4ade80";
+          statusMessage.textContent = "✅ Order saved, " + orderData.name + "! Kraftr Studio will message you on WhatsApp shortly.";
+          form.reset();
+        } else {
+          const errText = await response.text();
+          statusMessage.style.color = "#f87171";
+          statusMessage.textContent = "❌ Database Error (" + response.status + "): " + errText;
+        }
+      } catch (err) {
         statusMessage.style.color = "#f87171";
-        statusMessage.textContent = "❌ Error saving order: " + error.message;
-      } else {
-        statusMessage.style.color = "#4ade80";
-        statusMessage.textContent = "✅ Order saved, " + orderData.name + "! Kraftr Studio will message you on WhatsApp shortly.";
-        form.reset();
+        statusMessage.textContent = "❌ Network Error: " + err.message;
       }
     });
   </script>
